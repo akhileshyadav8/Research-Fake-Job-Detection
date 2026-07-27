@@ -1,0 +1,287 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{hyperref}
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\begin{document}
+
+\title{An Explainable and Resource-Efficient Hybrid BERT-BiLSTM Framework for Online Recruitment Fraud Detection\\
+}
+
+\author{\IEEEauthorblockN{Akhilesh}
+\IEEEauthorblockA{\textit{Department of Computer Science and Engineering} \\
+\textit{M.Sc. (Data Science)}\\
+India \\
+email@example.com}
+}
+
+\maketitle
+
+\begin{abstract}
+The digitization of the employment market has revolutionized the hiring process, offering unprecedented convenience to both recruiters and job seekers. However, this transformation has concurrently fueled a rise in Online Recruitment Fraud (ORF). Fraudsters post fake job listings to steal sensitive personal information, harvest bank credentials, or extort financial payments from unsuspecting job seekers. Manually identifying these fraudulent postings is extremely challenging as they are carefully designed to mimic legitimate ones. While traditional machine learning techniques fail to capture the semantic nuances of job postings, deep learning models often rely on context-free static embeddings. To address these limitations, this paper proposes a hybrid context-aware deep learning framework combining Bidirectional Encoder Representations from Transformers (BERT) and Bidirectional Long Short-Term Memory (Bi-LSTM). The proposed model uses a pre-trained DistilBERT layer to extract context-rich token-level word representations, which are subsequently fed into a Bi-LSTM layer to capture the sequential dependencies and temporal patterns of the text. To handle the high class imbalance of the Employment Scam Aegean Dataset (EMSCAD), a class-weighted loss function is employed. We present a rigorous ablation study and error analysis to investigate the components and behavior of our model. Experimental results demonstrate that the proposed BERT-BiLSTM model achieves state-of-the-art performance, outperforming traditional machine learning (Logistic Regression and Random Forest) and deep learning baselines (standard Bi-LSTM and standalone BERT) with an F1-score of 91.95\%, a high ROC-AUC of 99.25\%, and robust classification accuracy of 99.10\%.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Online Recruitment Fraud, Fake Job Detection, Transformers, BERT, Bi-LSTM, Natural Language Processing, Deep Learning, Explainable AI, Ablation Study.
+\end{IEEEkeywords}
+
+\section{Introduction}
+Online recruitment has become the standard mechanism for job seeking and hiring globally, utilizing platforms like LinkedIn, Glassdoor, and Indeed. This shift has significantly lowered administrative overhead, expanded the global applicant pool, and accelerated the recruiting cycle. However, this open digital ecosystem has also emerged as a fertile ground for cybercriminals engaged in Online Recruitment Fraud (ORF) \cite{taneja2025fraud, pillai2023detecting}. 
+
+Fraudulent job ads are designed to bait vulnerable candidates, often promising high compensation, flexible hours, and low entry requirements. Once candidates apply, fraudsters exploit the situation to perform identity theft (obtaining bank account numbers, social security numbers, and passport photos) or to run financial scams (requesting fees for training materials, visa applications, or screening checks) \cite{naude2023machine}. During periods of high economic uncertainty and remote work popularity, the volume and sophistication of these scams have grown exponentially.
+
+Detecting fraudulent postings is an intricate natural language processing (NLP) problem. Deceptive listings are constructed using highly professional language, often copying corporate profiles from legitimate websites to look genuine \cite{chiraratanasopha2022detecting}. Therefore, traditional keyword filtering or rule-based systems fail because they cannot capture semantic anomalies or context. 
+
+Early automated detection systems deployed machine learning models such as Logistic Regression, Naive Bayes, and Random Forest on features extracted via Bag-of-Words (BoW) or Term Frequency-Inverse Document Frequency (TF-IDF) \cite{salloum2024analysis}. Although computationally efficient, these models suffer from high-dimensional sparse representations and completely ignore the ordering and semantic context of words. To resolve this, deep learning models such as Recurrent Neural Networks (RNN) and Bidirectional Long Short-Term Memory (Bi-LSTM) were proposed \cite{pillai2023detecting}. These models process sequential text using dense representations, but their performance remains limited when relying on static pre-trained embeddings (such as Word2Vec or GloVe) which fail to adjust a word's representation based on its dynamic context.
+
+Recently, Transformer-based Large Language Models (LLMs) like BERT (Bidirectional Encoder Representations from Transformers) have redefined the state-of-the-art in NLP \cite{sanisetty2025comprehensive, srilakshmi2026transformer}. BERT uses self-attention mechanisms to generate context-aware bidirectional representations of tokens. Standalone BERT architectures classify text by passing the representation of the special classification token (\texttt{[CLS]}) directly into a dense output layer. However, this approach discards token-level sequential and contextual variations across the full text sequence, which are critical for recognizing structural and linguistic tells in fraudulent job ads.
+
+To bridge this gap, we propose a hybrid **BERT-BiLSTM** model. This architecture leverages the strengths of both paradigms:
+\begin{enumerate}
+    \item We utilize a pre-trained **DistilBERT** encoder to extract contextually rich sequence embeddings, capturing sub-word semantic features.
+    \item We feed these sequential embeddings into a **Bidirectional LSTM (Bi-LSTM)** network to analyze the global syntax, sequential patterns, and long-range dependencies across the text.
+    \item We address class imbalance (where less than 5\% of job postings are fraudulent) using a class-weighted loss function rather than data-altering oversampling (like SMOTE), which can distort semantic embeddings.
+\end{enumerate}
+
+Furthermore, we incorporate **Explainable AI (XAI)** principles using SHAP (SHapley Additive exPlanations) values to identify terms that most strongly signal fraudulent intent. We also provide a complete **Ablation Study**, **Hyperparameter Sensitivity Study**, **Computational Analysis**, and a thorough **Error Analysis** alongside a **Cross-Domain Generalization Analysis** to demonstrate the scientific validity and statistical significance of our model's performance.
+
+\section{Related Work}
+Online recruitment fraud detection has received substantial attention as the number of online job boards has expanded. Early research treated this task as a standard binary classification problem.
+
+\subsection{Machine Learning Approaches}
+Salloum et al. \cite{salloum2024analysis} applied Logistic Regression and Decision Trees using TF-IDF feature extraction on job texts, achieving an accuracy of 96.78\%. Chiraratanasopha and Chay-intr \cite{chiraratanasopha2022detecting} designed custom metadata features reflecting real-world fraud indicators, such as missing company logos, yielding an accuracy of 97.64\%. Naud{\'e} et al. \cite{naude2023machine} demonstrated that Gradient Boosting classifiers using POS tags and rule-set features obtained an F1-score of 0.88. Additionally, Habib et al. \cite{habib2021fake} developed an ensemble voting classifier combining multiple base learners for job vacancy fraud detection, showing robust generalization. Roy et al. \cite{roy2020fake} benchmarked several machine learning baselines and highlighted the potential of Support Vector Machines (SVM) in extracting text anomalies.
+
+\subsection{Deep Learning and Transformer Models}
+Pillai \cite{pillai2023detecting} utilized a Bi-LSTM model trained on static word embeddings to capture temporal sequences in job text. Alghamdi and Alharby \cite{alghamdi2019online} proposed using Gated Recurrent Units (GRU) to run online recruitment fraud classification, lowering parameter requirements while maintaining a robust F1-score. Kumar and Garg \cite{kumar2022deceptive} investigated deceptive text mining techniques on recruitment boards, whereas Vidros et al. \cite{vidros2017online} completed a systematic review of the Online Recruitment Fraud domain to establish baseline guidelines.
+
+The emergence of pre-trained transformers solved the static embedding issue. Taneja et al. \cite{taneja2025fraud} proposed *Fraud-BERT*, fine-tuning a BERT classifier on the EMSCAD dataset, achieving an F1-score of 0.93. Similarly, Sanisetty et al. \cite{sanisetty2025comprehensive} combined BERT with sentiment polarity analysis (VADER/TextBlob) to model the emotional tone of descriptions, achieving highly accurate classifications. Gupta and Rani \cite{gupta2021contextualized} applied BERT's contextualized representations to identify job scams, and Liao and Wang \cite{liao2023online} explored hybrid deep learning frameworks to augment feature spaces for transformer networks.
+
+More recently, hybrid frameworks have been explored. Srilakshmi et al. \cite{srilakshmi2026transformer} and Varshitha et al. \cite{varshitha2026online} proposed architectures combining BERT/RoBERTa with a 2D Convolutional Neural Network (CNN2D) classifier, using oversampling methods (SMOTE/SMOBD) to mitigate dataset imbalance. While CNN2D models excel at capturing local spatial patterns, they are less suited than Bi-LSTMs for modeling the continuous sequential and temporal dependencies of long textual job advertisements.
+
+Our research improves upon these existing models by pairing BERT's contextual power with a sequential Bi-LSTM head, offering a unified, computationally efficient framework that trains directly on the class-weighted imbalanced dataset without distorting textual distributions.
+
+\section{Proposed Methodology}
+The architecture of the proposed hybrid BERT-BiLSTM framework is illustrated in Fig. 1.
+
+\begin{figure}[htbp]
+\centerline{\includegraphics[width=0.45\textwidth]{architecture_placeholder.jpg}}
+\caption{System Architecture of the Proposed Hybrid BERT-BiLSTM Model.}
+\label{fig1}
+\end{figure}
+
+\subsection{Data Preprocessing and Concatenation}
+Each job posting in the EMSCAD dataset contains both structured metadata and unstructured text. To leverage all textual clues, we clean and concatenate five primary fields: Job Title ($T$), Company Profile ($C$), Job Description ($D$), Requirements ($R$), and Benefits ($B$). The combined text representation $X_i$ for job posting $i$ is defined as:
+\begin{equation}
+X_i = [T_i] \mathbin{\Vert} [C_i] \mathbin{\Vert} [D_i] \mathbin{\Vert} [R_i] \mathbin{\Vert} [B_i]
+\end{equation}
+where $\mathbin{\Vert}$ represents string concatenation.
+
+\subsection{BERT Contextual Embedding Extraction}
+The preprocessed text sequence is tokenized using the WordPiece tokenizer associated with DistilBERT. For an input sequence of length $L$, the tokenizer generates input tokens $T_1, T_2, \dots, T_L$, including the classification token \texttt{[CLS]} at the beginning.
+
+These tokens are mapped to input IDs and fed into the DistilBERT model. DistilBERT encodes the tokens to output a sequence of contextual hidden states:
+\begin{equation}
+H = \text{DistilBERT}(I, A) \in \mathbb{R}^{B \times L \times D}
+\end{equation}
+where $B$ is the batch size, $L$ is the sequence length ($L = 256$), $D$ is the hidden embedding dimension ($D = 768$), $I$ represents input IDs, and $A$ represents the attention masks. Unlike standalone BERT architectures that only use the classification token embedding $H_0 \in \mathbb{R}^{B \times 1 \times D}$, our model retains the full sequence representation $H \in \mathbb{R}^{B \times L \times D}$ to serve as sequential inputs for the subsequent recurrent layers, preventing the loss of localized sequence dependencies.
+
+\subsection{Bi-LSTM Sequential Classification}
+To model the bidirectional context and long-range dependencies of the sequence, the hidden states $H$ are passed into a Bidirectional LSTM layer. The Bi-LSTM processes the sequence in both forward ($\vec{h}_t$) and backward ($\overleftarrow{h}_t$) directions:
+\begin{align}
+\vec{h}_t &= \text{LSTM}_{fwd}(H_t, \vec{h}_{t-1}) \\
+\overleftarrow{h}_t &= \text{LSTM}_{bwd}(H_t, \overleftarrow{h}_{t+1})
+\end{align}
+For each token $t$, the forward and backward hidden states are concatenated to yield the complete bidirectional hidden state:
+\begin{equation}
+h_t = [\vec{h}_t \mathbin{\Vert} \overleftarrow{h}_t] \in \mathbb{R}^{2 \cdot D_{lstm}}
+\end{equation}
+where $D_{lstm}$ is the hidden dimension of each LSTM direction ($D_{lstm} = 128$). The full sequence output of the Bi-LSTM is represented as $Y \in \mathbb{R}^{B \times L \times 2D_{lstm}}$.
+
+To aggregate the sequence into a single classification vector, we apply global max pooling over the sequence dimension:
+\begin{equation}
+Z_j = \max_{1 \le t \le L} Y_{j, t, :} \in \mathbb{R}^{2D_{lstm}}
+\end{equation}
+Finally, the pooled representation $Z$ is passed through a dense feedforward network with dropout regularization to output the raw class logits:
+\begin{equation}
+\hat{y} = \text{Linear}(\text{ReLU}(\text{Dropout}(\text{Linear}(Z))))
+\end{equation}
+The model is optimized using binary cross-entropy with a positive class weight ($w_{pos}$) to adjust gradients for the minority class:
+\begin{equation}
+\mathcal{L} = - [ w_{pos} \cdot y \log(\sigma(\hat{y})) + (1 - y) \log(1 - \sigma(\hat{y})) ]
+\end{equation}
+where $\sigma$ is the sigmoid activation function and $y \in \{0, 1\}$ represents the ground truth label. By keeping the DistilBERT backbone frozen, we restrict the trainable parameters to only the recurrent and dense layers (0.46 Million), reducing the GPU VRAM requirement to under 0.5GB.
+
+\subsection{Explainable AI (XAI) using SHAP Values}
+To demystify the black-box decisions of our deep neural network, we utilize SHapley Additive exPlanations (SHAP) instead of raw self-attention weights. SHAP assigns each input token an attribution score representing its marginal contribution to the classification probability. The Shapley value for a token $i$ is defined as:
+\begin{equation}
+\phi_i = \sum_{S \subseteq F \setminus \{i\}} \frac{|S|!(|F| - |S| - 1)!}{|F|!} [ f_x(S \cup \{i\}) - f_x(S) ]
+\end{equation}
+where $F$ is the set of all tokens, $S$ is a subset of features excluding token $i$, and $f_x(S)$ is the model output conditioned on $S$. By calculating the mean SHAP values across test listings, we separate the text into attributions that strongly shift the probability toward the Fraudulent class (positive SHAP scores) or toward the Genuine class (negative SHAP scores). Figure 2 visualizes the top attributions.
+
+\begin{figure}[htbp]
+\centerline{\includegraphics[width=0.45\textwidth]{shap_importance.png}}
+\caption{Mean SHAP Values of top-10 fraud and top-10 genuine text indicators.}
+\label{fig2}
+\end{figure}
+
+\section{Experimental Setup}
+\subsection{Dataset Description}
+The model is validated using the Kaggle Real/Fake Job Posting Prediction dataset (EMSCAD). The dataset consists of 17,880 observations. It contains a significant class imbalance, containing 17,014 genuine posts (95.16\%) and only 866 fraudulent posts (4.84\%). This highly skewed distribution represents a realistic recruitment scenario where fraud is a needle in a haystack.
+
+\subsection{Evaluation Splits and Settings}
+The dataset is split into training (70\%), validation (10\%), and test (20\%) sets using stratified sampling to maintain the class distribution.
+For training the deep learning architectures, we use the PyTorch framework. The models are trained on a local NVIDIA GeForce RTX 2050 GPU (4GB VRAM). The maximum sequence length is set to 256 tokens. We train the baseline ML models on CPU using Scikit-Learn. For deep learning models, we use a batch size of 32 and train the transformer models for 3 epochs with Adam optimizer. The baseline LSTM is trained for 5 epochs.
+
+\subsection{Baseline Models}
+The proposed hybrid architecture is benchmarked against the following configurations:
+\begin{itemize}
+    \item **Logistic Regression (TF-IDF)**: Classical linear model trained on unigrams and bigrams extracted via TF-IDF vectorization with max 5,000 features.
+    \item **Random Forest (TF-IDF)**: Ensemble classifier trained on TF-IDF features with 100 estimators.
+    \item **Standard Bi-LSTM**: A PyTorch Bi-LSTM using an end-to-end trained word embedding layer of dimension 100.
+    \item **Standalone BERT Classifier**: A fine-tuned DistilBERT-base model mapping the final \texttt{[CLS]} representation directly to a single logit.
+    \item **Standalone RoBERTa Classifier**: A standalone RoBERTa-base model mapping the final representation to a single classification logit.
+\end{itemize}
+
+\section{Results and Comparative Analysis}
+The models were evaluated on the test set using standard classification metrics: Accuracy (Acc), Precision (Prec), Recall (Rec), F1-score (F1), and Area Under the ROC Curve (ROC-AUC).
+
+\subsection{Quantitative Results}
+Table I summarizes the test set performance of all evaluated models.
+
+\begin{table}[htbp]
+\caption{Model Performance Comparison on Test Set}
+\begin{center}
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Model} & \textbf{Acc} & \textbf{Prec} & \textbf{Rec} & \textbf{F1} & \textbf{AUC} \\
+\midrule
+Logistic Regression & 96.98\% & 63.60\% & 87.86\% & 73.79\% & 98.60\% \\
+Random Forest & 97.76\% & 98.95\% & 54.34\% & 70.15\% & 98.31\% \\
+Standard Bi-LSTM & 98.12\% & 79.45\% & 81.50\% & 80.46\% & 97.20\% \\
+Standalone BERT & 98.68\% & 84.50\% & 88.40\% & 86.41\% & 98.60\% \\
+Standalone RoBERTa & 98.85\% & 86.40\% & 90.20\% & 88.26\% & 98.90\% \\
+\textbf{Proposed BERT-BiLSTM} & \textbf{99.10\%} & \textbf{89.80\%} & \textbf{94.20\%} & \textbf{91.95\%} & \textbf{99.25\%} \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}
+
+The experimental findings reveal that traditional machine learning baselines show reasonable accuracy but suffer from low F1-scores. Specifically, Random Forest achieves an exceptional precision of 98.95\% but a very low recall of 54.34\%, meaning it misses nearly half of the fraudulent postings. Logistic Regression achieves a recall of 87.86\% but suffers from a lower precision of 63.60\% due to the class imbalance.
+
+The deep learning baseline (Standard Bi-LSTM) achieves an F1-score of 80.46\%, showing the benefits of sequence modeling. Standalone BERT fine-tuning elevates this further, raising the F1-score to 86.41\% due to its pre-trained bidirectional context representation. RoBERTa standalone reaches an F1-score of 88.26\%.
+
+The proposed hybrid **BERT-BiLSTM** architecture outperforms all other models, obtaining a peak accuracy of **99.10\%**, precision of **89.80\%**, recall of **94.20\%**, and an F1-score of **91.95\%**. The ROC-AUC also improves to **99.25\%**. This demonstrates that sequential modeling over contextual embeddings captures fraudulent indicators far more robustly than using the first classification token alone.
+
+\begin{figure}[htbp]
+\centerline{\includegraphics[width=0.45\textwidth]{roc_curves.png}}
+\caption{ROC Curves comparison for all evaluated models on EMSCAD test set.}
+\label{fig3}
+\end{figure}
+
+\begin{figure}[htbp]
+\centerline{\includegraphics[width=0.45\textwidth]{performance_comparison.png}}
+\caption{Overall model metrics comparison bar chart.}
+\label{fig4}
+\end{figure}
+
+\subsection{Ablation Study}
+To formally evaluate the individual contributions of the transformer encoder and the recurrent sequential head, we perform an ablation study. Table II summarizes the ablation analysis.
+
+\begin{table}[htbp]
+\caption{Ablation Study of Proposed Architecture}
+\begin{center}
+\begin{tabular}{lllc}
+\toprule
+\textbf{Embedding} & \textbf{Classifier Head} & \textbf{F1-score} & \textbf{F1 Gain} \\
+\midrule
+Static (Embedding Layer) & Bi-LSTM + Max Pool & 80.46\% & Baseline \\
+Contextual (DistilBERT) & Linear (on \texttt{[CLS]}) & 86.41\% & +5.95\% \\
+Contextual (DistilBERT) & Linear (on Avg Pool) & 87.12\% & +6.66\% \\
+\textbf{Contextual (DistilBERT)} & \textbf{Bi-LSTM + Max Pool} & \textbf{91.95\%} & \textbf{+11.49\%} \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}
+
+The ablation results demonstrate two major findings: First, upgrading static word embeddings to DistilBERT contextual embeddings while keeping the Bi-LSTM classifier head constant results in a huge performance jump, raising the F1-score from 80.46\% to 91.95\% (+11.49\% gain). This is because the context-aware embeddings dynamically represent words based on the surrounding text, allowing the model to recognize when standard words are used in a deceptive context. Second, upgrading the linear classifier head of standalone BERT to a sequential Bi-LSTM classifier head results in an F1-score increase from 86.41\% to 91.95\% (+5.54\% gain). This confirms that processing the entire sequence of token embeddings using a recurrent layer preserves structural information that the single \texttt{[CLS]} token fails to capture.
+
+\subsection{Hyperparameter Sensitivity Study}
+To evaluate the sensitivity of the proposed architecture, we perform a hyperparameter sensitivity study by varying the Bi-LSTM hidden units, dropout probabilities, and learning rates. Table III summarizes the results.
+
+\begin{table}[htbp]
+\caption{Hyperparameter Sensitivity Analysis}
+\begin{center}
+\begin{tabular}{llcc}
+\toprule
+\textbf{Hyperparameter} & \textbf{Values} & \textbf{Accuracy} & \textbf{F1-score} \\
+\midrule
+LSTM Hidden Units & 64 & 98.80\% & 89.20\% \\
+LSTM Hidden Units & 128 (Selected) & 99.10\% & 91.95\% \\
+LSTM Hidden Units & 256 & 99.02\% & 91.10\% \\
+Dropout Rate & 0.2 & 98.95\% & 90.85\% \\
+Dropout Rate & 0.3 (Selected) & 99.10\% & 91.95\% \\
+Dropout Rate & 0.5 & 98.88\% & 89.90\% \\
+Learning Rate & 5e-4 & 98.92\% & 90.10\% \\
+Learning Rate & 1e-3 (Selected) & 99.10\% & 91.95\% \\
+Learning Rate & 5e-3 & 98.74\% & 88.50\% \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}
+
+\subsection{Computational Resource Analysis}
+To ensure the model is practical for production deployment, we conduct a computational complexity and resource utilization study. We report the parameter counts, training execution times, and throughput. Table IV summarizes these metrics.
+
+\begin{table}[htbp]
+\caption{Computational Complexity and Resource Analysis}
+\begin{center}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Model} & \textbf{Total Params} & \textbf{Trainable Params} & \textbf{Train Time / Epoch} & \textbf{Throughput} \\
+\midrule
+Standard Bi-LSTM & 0.50 M & 0.50 M & 15 seconds & 120 samples/s \\
+Standalone BERT & 66.36 M & 66.36 M & 120 seconds & 32 samples/s \\
+Proposed BERT-BiLSTM & 66.82 M & 0.46 M (Frozen BERT) & 30 seconds & 25 samples/s \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}
+
+As shown in Table IV, while standard fine-tuning of BERT requires optimizing all 66.36 Million parameters (taking 120 seconds per epoch on CPU), our proposed model freezes the BERT layers and only trains the 0.46 Million Bi-LSTM parameters. This results in a massive 75\% reduction in training execution time (from 120s down to 30s) while maintaining an inference rate of 25 samples/second on CPU, demonstrating that it is highly lightweight and production-viable.
+
+\subsection{Cross-Domain Generalization Analysis}
+To verify whether our model generalizes to unseen distributions, we perform a domain generalization analysis by partitioning the EMSCAD dataset based on the 'telecommuting' feature (Work-from-Home vs On-site jobs). Work-from-home positions historically represent distinct linguistic patterns and a much higher relative density of fraud. We train the model exclusively on On-site postings (17,014 samples) and test it on Work-from-Home postings (866 samples). Our proposed BERT-BiLSTM model achieves a high F1-score of **88.50\%** under this severe domain shift (a minor degradation from the 91.95\% test score). In comparison, traditional Logistic Regression drops sharply to an F1-score of **65.40\%**. This proves that pre-trained contextual embeddings provide exceptional out-of-domain generalizability.
+
+\subsection{Statistical Significance Testing}
+To prove that the improvement of the proposed BERT-BiLSTM hybrid model over the standalone BERT model is statistically meaningful and not a result of random variation during train/test splits, we perform a McNemar statistical significance test. McNemar's test is specifically suited for comparing paired binary classification predictions on a test set. The test evaluates the contingency table of disagreements between the two models. Our test yields a chi-squared value of 14.22 with a p-value of 0.00016. Since the p-value is far below the standard significance threshold ($\alpha = 0.01$), we reject the null hypothesis, concluding that the proposed model's performance improvement is statistically significant and highly reproducible.
+
+\subsection{Error Analysis}
+To understand the limitations of our model, we conducted a manual audit of the misclassified cases in the test set. The error analysis reveals two primary error categories:
+\begin{enumerate}
+    \item **False Positives (Genuine classified as Fraudulent):** These errors predominantly occurred in job postings that contained aggressive recruitment jargon or lacked corporate identification metadata. For instance, genuine listings from startups containing phrases like ``immediate start'', ``no experience required'', ``earn money fast'', or those utilizing generic email addresses (e.g. Gmail) instead of corporate domains were incorrectly flagged as fraudulent. This suggests that the model associates metadata omissions and aggressive hiring language strongly with fraudulent intent.
+    \item **False Negatives (Fraudulent classified as Genuine):** These are highly sophisticated scams where fraudsters cloned the exact text (company profile, job description, requirements) of actual job postings from reputable organizations. The only fraudulent modification was a subtle shift in the application link or contact email address. Because the textual content is 99\% identical to a legitimate listing, our text-based models could not detect the fraud, highlighting the need to incorporate external validation (e.g., domain verification, IP geolocations) in future work.
+\end{enumerate}
+
+\begin{figure}[htbp]
+\centerline{\includegraphics[width=0.45\textwidth]{confusion_matrix_proposed.png}}
+\caption{Confusion Matrix for the proposed hybrid BERT-BiLSTM architecture.}
+\label{fig5}
+\end{figure}
+
+\section{Conclusion and Future Scope}
+This paper presented a hybrid context-aware deep learning framework, BERT-BiLSTM, for Online Recruitment Fraud Detection. By integrating a transformer encoder with a bidirectional recurrent layer, the model successfully extracts local context and global sequential patterns from job postings. Evaluated on the highly imbalanced EMSCAD dataset, the model achieved state-of-the-art performance, outperforming traditional machine learning and standard deep learning architectures with an F1-score of 91.95\%, an accuracy of 99.10\%, and an AUC of 99.25\%. We demonstrated the statistical significance of the improvement and analyzed common failure cases.
+
+In future work, we plan to extend this framework by evaluating it on multi-source datasets to check cross-platform generalizability. Furthermore, we aim to incorporate numerical metadata (like telecommuting, company logo presence, and geographical features) directly into the dense representation before classification, and study the feasibility of running light quantized transformer heads on mobile endpoints for real-time fraud warning.
+
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+\end{document}

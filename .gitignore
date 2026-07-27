@@ -1,0 +1,27 @@
+# PyTorch checkpoints and weights
+*.pt
+*.pth
+
+# Saved Scikit-Learn models
+*.pkl
+
+# Datasets
+*.csv
+*.xlsx
+
+# Python environment & cache
+__pycache__/
+*.py[cod]
+*$py.class
+.env
+.venv
+env/
+venv/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# IDE files
+.vscode/
+.idea/
+test_out.docx
