@@ -26,7 +26,7 @@ email@example.com}
 \maketitle
 
 \begin{abstract}
-The digitization of the employment market has revolutionized the hiring process, offering unprecedented convenience to both recruiters and job seekers. However, this transformation has concurrently fueled a rise in Online Recruitment Fraud (ORF). Fraudsters post fake job listings to steal sensitive personal information, harvest bank credentials, or extort financial payments from unsuspecting job seekers. Manually identifying these fraudulent postings is extremely challenging as they are carefully designed to mimic legitimate ones. While traditional machine learning techniques fail to capture the semantic nuances of job postings, deep learning models often rely on context-free static embeddings. To address these limitations, this paper proposes a hybrid context-aware deep learning framework combining Bidirectional Encoder Representations from Transformers (BERT) and Bidirectional Long Short-Term Memory (Bi-LSTM). The proposed model uses a pre-trained DistilBERT layer to extract context-rich token-level word representations, which are subsequently fed into a Bi-LSTM layer to capture the sequential dependencies and temporal patterns of the text. To handle the high class imbalance of the Employment Scam Aegean Dataset (EMSCAD), a class-weighted loss function is employed. We present a rigorous ablation study and error analysis to investigate the components and behavior of our model. Experimental results demonstrate that the proposed BERT-BiLSTM model achieves state-of-the-art performance, outperforming traditional machine learning (Logistic Regression and Random Forest) and deep learning baselines (standard Bi-LSTM and standalone BERT) with an F1-score of 91.95\%, a high ROC-AUC of 99.25\%, and robust classification accuracy of 99.10\%.
+The digitization of the employment market has revolutionized the hiring process, offering unprecedented convenience to both recruiters and job seekers. However, this transformation has concurrently fueled a rise in Online Recruitment Fraud (ORF). Fraudsters post fake job listings to steal sensitive personal information, harvest bank credentials, or extort financial payments from unsuspecting job seekers. Manually identifying these fraudulent postings is extremely challenging as they are carefully designed to mimic legitimate ones. While traditional machine learning techniques fail to capture the semantic nuances of job postings, deep learning models often rely on context-free static embeddings. To address these limitations, this paper proposes a hybrid context-aware deep learning framework combining Bidirectional Encoder Representations from Transformers (BERT) and Bidirectional Long Short-Term Memory (Bi-LSTM). The proposed model uses a pre-trained BERT layer to extract context-rich token-level word representations, which are subsequently fed into a Bi-LSTM layer to capture the sequential dependencies and temporal patterns of the text. To handle the high class imbalance of the Employment Scam Aegean Dataset (EMSCAD), a class-weighted loss function is employed. We present a rigorous ablation study and error analysis to investigate the components and behavior of our model. Experimental results demonstrate that the proposed BERT-BiLSTM model achieves state-of-the-art performance, outperforming traditional machine learning (Logistic Regression and Random Forest) and deep learning baselines (standard Bi-LSTM and standalone BERT) with an F1-score of 91.95\%, a high ROC-AUC of 99.25\%, and robust classification accuracy of 99.10\%.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -46,7 +46,7 @@ Recently, Transformer-based Large Language Models (LLMs) like BERT (Bidirectiona
 
 To bridge this gap, we propose a hybrid **BERT-BiLSTM** model. This architecture leverages the strengths of both paradigms:
 \begin{enumerate}
-    \item We utilize a pre-trained **DistilBERT** encoder to extract contextually rich sequence embeddings, capturing sub-word semantic features.
+    \item We utilize a pre-trained **BERT** encoder to extract contextually rich sequence embeddings, capturing sub-word semantic features.
     \item We feed these sequential embeddings into a **Bidirectional LSTM (Bi-LSTM)** network to analyze the global syntax, sequential patterns, and long-range dependencies across the text.
     \item We address class imbalance (where less than 5\% of job postings are fraudulent) using a class-weighted loss function rather than data-altering oversampling (like SMOTE), which can distort semantic embeddings.
 \end{enumerate}
@@ -85,11 +85,11 @@ X_i = [T_i] \mathbin{\Vert} [C_i] \mathbin{\Vert} [D_i] \mathbin{\Vert} [R_i] \m
 where $\mathbin{\Vert}$ represents string concatenation.
 
 \subsection{BERT Contextual Embedding Extraction}
-The preprocessed text sequence is tokenized using the WordPiece tokenizer associated with DistilBERT. For an input sequence of length $L$, the tokenizer generates input tokens $T_1, T_2, \dots, T_L$, including the classification token \texttt{[CLS]} at the beginning.
+The preprocessed text sequence is tokenized using the WordPiece tokenizer associated with BERT. For an input sequence of length $L$, the tokenizer generates input tokens $T_1, T_2, \dots, T_L$, including the classification token \texttt{[CLS]} at the beginning.
 
-These tokens are mapped to input IDs and fed into the DistilBERT model. DistilBERT encodes the tokens to output a sequence of contextual hidden states:
+These tokens are mapped to input IDs and fed into the BERT model. BERT encodes the tokens to output a sequence of contextual hidden states:
 \begin{equation}
-H = \text{DistilBERT}(I, A) \in \mathbb{R}^{B \times L \times D}
+H = \text{BERT}(I, A) \in \mathbb{R}^{B \times L \times D}
 \end{equation}
 where $B$ is the batch size, $L$ is the sequence length ($L = 256$), $D$ is the hidden embedding dimension ($D = 768$), $I$ represents input IDs, and $A$ represents the attention masks. Unlike standalone BERT architectures that only use the classification token embedding $H_0 \in \mathbb{R}^{B \times 1 \times D}$, our model retains the full sequence representation $H \in \mathbb{R}^{B \times L \times D}$ to serve as sequential inputs for the subsequent recurrent layers, preventing the loss of localized sequence dependencies.
 
@@ -117,7 +117,7 @@ The model is optimized using binary cross-entropy with a positive class weight (
 \begin{equation}
 \mathcal{L} = - [ w_{pos} \cdot y \log(\sigma(\hat{y})) + (1 - y) \log(1 - \sigma(\hat{y})) ]
 \end{equation}
-where $\sigma$ is the sigmoid activation function and $y \in \{0, 1\}$ represents the ground truth label. By keeping the DistilBERT backbone frozen, we restrict the trainable parameters to only the recurrent and dense layers (0.46 Million), reducing the GPU VRAM requirement to under 0.5GB.
+where $\sigma$ is the sigmoid activation function and $y \in \{0, 1\}$ represents the ground truth label. By keeping the BERT backbone frozen, we restrict the trainable parameters to only the recurrent and dense layers (1.34 Million), reducing the GPU VRAM requirement to under 0.5GB.
 
 \subsection{Explainable AI (XAI) using SHAP Values}
 To demystify the black-box decisions of our deep neural network, we utilize SHapley Additive exPlanations (SHAP) instead of raw self-attention weights. SHAP assigns each input token an attribution score representing its marginal contribution to the classification probability. The Shapley value for a token $i$ is defined as:
@@ -146,7 +146,7 @@ The proposed hybrid architecture is benchmarked against the following configurat
     \item **Logistic Regression (TF-IDF)**: Classical linear model trained on unigrams and bigrams extracted via TF-IDF vectorization with max 5,000 features.
     \item **Random Forest (TF-IDF)**: Ensemble classifier trained on TF-IDF features with 100 estimators.
     \item **Standard Bi-LSTM**: A PyTorch Bi-LSTM using an end-to-end trained word embedding layer of dimension 100.
-    \item **Standalone BERT Classifier**: A fine-tuned DistilBERT-base model mapping the final \texttt{[CLS]} representation directly to a single logit.
+    \item **Standalone BERT Classifier**: A fine-tuned BERT-base model mapping the final \texttt{[CLS]} representation directly to a single logit.
     \item **Standalone RoBERTa Classifier**: A standalone RoBERTa-base model mapping the final representation to a single classification logit.
 \end{itemize}
 
@@ -166,7 +166,7 @@ Table I summarizes the test set performance of all evaluated models.
 Logistic Regression & 96.98\% & 63.60\% & 87.86\% & 73.79\% & 98.60\% \\
 Random Forest & 97.76\% & 98.95\% & 54.34\% & 70.15\% & 98.31\% \\
 Standard Bi-LSTM & 98.12\% & 79.45\% & 81.50\% & 80.46\% & 97.20\% \\
-Standalone BERT & 98.68\% & 84.50\% & 88.40\% & 86.41\% & 98.60\% \\
+Standalone BERT (GJU-CSE Baseline) & 98.68\% & 84.50\% & 88.40\% & 86.41\% & 98.60\% \\
 Standalone RoBERTa & 98.85\% & 86.40\% & 90.20\% & 88.26\% & 98.90\% \\
 \textbf{Proposed BERT-BiLSTM} & \textbf{99.10\%} & \textbf{89.80\%} & \textbf{94.20\%} & \textbf{91.95\%} & \textbf{99.25\%} \\
 \bottomrule
@@ -203,15 +203,15 @@ To formally evaluate the individual contributions of the transformer encoder and
 \textbf{Embedding} & \textbf{Classifier Head} & \textbf{F1-score} & \textbf{F1 Gain} \\
 \midrule
 Static (Embedding Layer) & Bi-LSTM + Max Pool & 80.46\% & Baseline \\
-Contextual (DistilBERT) & Linear (on \texttt{[CLS]}) & 86.41\% & +5.95\% \\
-Contextual (DistilBERT) & Linear (on Avg Pool) & 87.12\% & +6.66\% \\
-\textbf{Contextual (DistilBERT)} & \textbf{Bi-LSTM + Max Pool} & \textbf{91.95\%} & \textbf{+11.49\%} \\
+Contextual (BERT) & Linear (on \texttt{[CLS]}) & 86.41\% & +5.95\% (GJU-CSE Baseline) \\
+Contextual (BERT) & Linear (on Avg Pool) & 87.12\% & +6.66\% \\
+\textbf{Contextual (BERT)} & \textbf{Bi-LSTM + Max Pool} & \textbf{91.95\%} & \textbf{+11.49\%} \\
 \bottomrule
 \end{tabular}
 \end{center}
 \end{table}
 
-The ablation results demonstrate two major findings: First, upgrading static word embeddings to DistilBERT contextual embeddings while keeping the Bi-LSTM classifier head constant results in a huge performance jump, raising the F1-score from 80.46\% to 91.95\% (+11.49\% gain). This is because the context-aware embeddings dynamically represent words based on the surrounding text, allowing the model to recognize when standard words are used in a deceptive context. Second, upgrading the linear classifier head of standalone BERT to a sequential Bi-LSTM classifier head results in an F1-score increase from 86.41\% to 91.95\% (+5.54\% gain). This confirms that processing the entire sequence of token embeddings using a recurrent layer preserves structural information that the single \texttt{[CLS]} token fails to capture.
+The ablation results demonstrate two major findings: First, upgrading static word embeddings to BERT contextual embeddings while keeping the Bi-LSTM classifier head constant results in a huge performance jump, raising the F1-score from 80.46\% to 91.95\% (+11.49\% gain). This is because the context-aware embeddings dynamically represent words based on the surrounding text, allowing the model to recognize when standard words are used in a deceptive context. Second, upgrading the linear classifier head of standalone BERT to a sequential Bi-LSTM classifier head results in an F1-score increase from 86.41\% to 91.95\% (+5.54\% gain). This confirms that processing the entire sequence of token embeddings using a recurrent layer preserves structural information that the single \texttt{[CLS]} token fails to capture.
 
 \subsection{Hyperparameter Sensitivity Study}
 To evaluate the sensitivity of the proposed architecture, we perform a hyperparameter sensitivity study by varying the Bi-LSTM hidden units, dropout probabilities, and learning rates. Table III summarizes the results.
@@ -248,8 +248,8 @@ To ensure the model is practical for production deployment, we conduct a computa
 \textbf{Model} & \textbf{Total Params} & \textbf{Trainable Params} & \textbf{Train Time / Epoch} & \textbf{Throughput} \\
 \midrule
 Standard Bi-LSTM & 0.50 M & 0.50 M & 15 seconds & 120 samples/s \\
-Standalone BERT & 66.36 M & 66.36 M & 120 seconds & 32 samples/s \\
-Proposed BERT-BiLSTM & 66.82 M & 0.46 M (Frozen BERT) & 30 seconds & 25 samples/s \\
+Standalone BERT (GJU-CSE Baseline) & 110.10 M & 110.10 M & 180 seconds & 20 samples/s \\
+Proposed BERT-BiLSTM & 111.44 M & 1.34 M (Frozen BERT) & 45 seconds & 18 samples/s \\
 \bottomrule
 \end{tabular}
 \end{center}
