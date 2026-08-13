@@ -19,7 +19,7 @@ akhileshyadav8@gmail.com}
 \maketitle
 
 \begin{abstract}
-Online recruitment fraud has emerged as a critical cybersecurity challenge, with scammers exploiting employment boards to conduct identity theft and financial scams. Automatic detection using text classification is challenging because fraudulent listings mimic legitimate corporate language. In this study, we replicate and optimize the baseline fine-tuning methodology of the Fraud-BERT framework using the full bert-base-uncased architecture. To address the severe class imbalance in the Employment Scam Aegean Dataset (EMSCAD), we implement a class-weighted binary cross-entropy loss function. Furthermore, to resolve the black-box limitation of transformer networks, we integrate game-theoretic Explainable AI (XAI) via SHAP values, tracing token attributions to verify the linguistic features that drive classification. Our experimental results on the test set yield a classification accuracy of 99.02%, Class 1 (Fraudulent) precision of 91.57%, recall of 87.86%, and F1-score of 89.68%. Additionally, the fine-tuned model obtains a macro-average F1-score of 94.58% and a high ROC-AUC of 99.22%. These findings confirm that fine-tuned transformer backbones, when regularized and explained using game-theoretic feature attribution, offer a highly reliable baseline for automated recruitment security.
+Online recruitment platforms have simplified global recruitment processes. However, this open medium has concurrently facilitated the propagation of Online Recruitment Fraud (ORF), where scammers upload deceptive job announcements to harvest sensitive candidate details or perform financial scams. Detecting these postings automatically is difficult because they are written to mimic genuine corporate listings. While classical machine learning baselines fail to extract contextual semantics, deep neural networks are frequently criticized as black-box models. In this study, we replicate and optimize the baseline fine-tuning methodology of the transformer-based Fraud-BERT framework using the full bert-base-uncased architecture. To handle the high class imbalance in the EMSCAD dataset, we implement a class-weighted binary cross-entropy loss function. Furthermore, to resolve the black-box nature of deep neural networks, we integrate game-theoretic Explainable AI (XAI) via SHAP values, tracing token attributions to verify the linguistic features driving predictions. Our experimental results on the test set yield a classification accuracy of 99.02%, Class 1 (Fraudulent) precision of 91.57%, recall of 87.86%, and F1-score of 89.68%. Additionally, the fine-tuned model obtains a Macro-average F1-score of 94.58% and a high ROC-AUC of 99.22%. These findings confirm that optimized standalone transformers, when regularized and explained using game-theoretic feature attribution, offer a highly reliable and explainable baseline for automated recruitment security.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -27,7 +27,7 @@ Online Recruitment Fraud, Transformer, BERT, Fine-Tuning, Explainable AI, SHAP
 \end{IEEEkeywords}
 
 \section{Introduction}
-The digitalization of the global labor market has transitioned hiring processes to online recruitment platforms. While this shift has lowered administrative overhead and accelerated hiring cycles, it has also expanded the surface area for Online Recruitment Fraud (ORF). Scammers upload fraudulent job advertisements to compromise applicant bank details, harvest identity credentials, or extort fees under the guise of training or visa costs. Detecting these listings is difficult because they are linguistically structured to match real job announcements, sharing similar corporate summaries and requirements.
+The digitization of the global labor market has transitioned hiring processes to online recruitment platforms. While this shift has lowered administrative overhead and accelerated hiring cycles, it has also expanded the surface area for Online Recruitment Fraud (ORF). Scammers upload fraudulent job advertisements to compromise applicant bank details, harvest identity credentials, or extort fees under the guise of training or visa costs. Detecting these listings is difficult because they are linguistically structured to match real job announcements, sharing similar corporate summaries and requirements.
 
 Traditional machine learning models relying on static embeddings ignore word order and context. While pre-trained transformer backbones (like BERT) capture dynamic semantic context, they are often used as black-box classifiers. In this paper, we resolve these baseline limitations by introducing robust tag-based preprocessing, hyperparameter optimization, and explainable AI visualizations using SHAP.
 
@@ -62,7 +62,7 @@ To resolve the black-box nature of deep neural networks, we utilize Shapley Addi
 We validate our models on the Kaggle EMSCAD dataset (17,880 rows, containing 4.84\% fraudulent job listings). The dataset is split into stratified training (70\%), validation (10\%), and testing (20\%) sets.
 
 \begin{table}[htbp]
-\caption{Classification Performance Comparison on the Test Set}
+\caption{Performance Comparison on Test Set}
 \label{tab:results}
 \begin{center}
 \begin{tabular}{lcccccc}
