@@ -877,7 +877,7 @@ def create_bert_bilstm_notebook():
                     "    num_training_steps=total_steps\n",
                     ")\n",
                     "\n",
-                    "pos_weight = torch.tensor([3.5]).to(device) # Upgraded pos_weight to 3.5 to boost recall and F1-score on imbalanced class 1\n",
+                    "pos_weight = torch.tensor([2.0]).to(device)  # Class weight for imbalanced Class 1\n",
                     "criterion = nn.BCEWithLogitsLoss(pos_weight=pos_weight)\n",
                     "\n",
                     "best_f1 = 0.0\n",
