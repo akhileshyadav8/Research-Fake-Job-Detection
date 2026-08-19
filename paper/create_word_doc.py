@@ -487,7 +487,7 @@ def build_proposed_model_paper(target_dir):
     row_data = [
         ["Logistic Regression", "0.81", "0.93", "0.86", "0.97", "0.98"],
         ["Random Forest", "0.99", "0.78", "0.85", "0.98", "0.98"],
-        ["Bi-LSTM", "0.89", "0.90", "0.90", "0.98", "0.97"],
+        ["Bi-LSTM", "0.89", "0.90", "0.90", "0.98", "0.88"],
         ["Fraud-BERT [1]", "0.94", "0.92", "0.93", "0.99", "0.99"],
         ["Proposed BERT-BiLSTM", "0.97", "0.92", "0.94", "0.99", "0.99"]
     ]
@@ -905,7 +905,7 @@ def build_standalone_bert_paper(target_dir):
     row_data = [
         ["Logistic Regression", "0.81", "0.93", "0.86", "0.97", "0.98"],
         ["Random Forest", "0.99", "0.78", "0.85", "0.98", "0.98"],
-        ["Standard Bi-LSTM", "0.89", "0.90", "0.90", "0.98", "0.97"],
+        ["Standard Bi-LSTM", "0.89", "0.90", "0.90", "0.98", "0.88"],
         ["Proposed BERT Model", "0.95", "0.94", "0.95", "0.99", "0.99"]
     ]
     
