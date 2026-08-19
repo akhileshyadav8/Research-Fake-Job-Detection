@@ -7,7 +7,7 @@ from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 import re
 
-def set_section_columns(section, num_cols, space_pt=18):
+def set_section_columns(section, num_cols, space_pt=14):
     sectPr = section._sectPr
     cols = sectPr.find(qn('w:cols'))
     if cols is None:
@@ -84,8 +84,8 @@ def add_formatted_run_text(p, text, size_pt=10):
 def add_heading_1(doc, text):
     p = doc.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    p.paragraph_format.space_before = Pt(14)
-    p.paragraph_format.space_after = Pt(6)
+    p.paragraph_format.space_before = Pt(10)
+    p.paragraph_format.space_after = Pt(4)
     p.paragraph_format.keep_with_next = True
     run = p.add_run(text)
     format_run(run, font_name="Times New Roman", size_pt=10, bold=True)
@@ -94,8 +94,8 @@ def add_heading_1(doc, text):
 def add_heading_2(doc, text):
     p = doc.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.LEFT
-    p.paragraph_format.space_before = Pt(10)
-    p.paragraph_format.space_after = Pt(4)
+    p.paragraph_format.space_before = Pt(8)
+    p.paragraph_format.space_after = Pt(3)
     p.paragraph_format.keep_with_next = True
     run = p.add_run(text)
     format_run(run, font_name="Times New Roman", size_pt=10, bold=False, italic=True)
@@ -105,7 +105,7 @@ def add_body_paragraph(doc, text, first_line_indent_in=0.15):
     p = doc.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
     p.paragraph_format.line_spacing = 1.05
-    p.paragraph_format.space_after = Pt(4)
+    p.paragraph_format.space_after = Pt(3)
     if first_line_indent_in > 0:
         p.paragraph_format.first_line_indent = Inches(first_line_indent_in)
     
@@ -124,8 +124,8 @@ def add_body_paragraph(doc, text, first_line_indent_in=0.15):
 def add_equation(doc, label, eq_text):
     p = doc.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    p.paragraph_format.space_before = Pt(6)
-    p.paragraph_format.space_after = Pt(6)
+    p.paragraph_format.space_before = Pt(4)
+    p.paragraph_format.space_after = Pt(4)
     
     run_eq = p.add_run(eq_text + "\t\t")
     format_run(run_eq, font_name="Times New Roman", size_pt=10, italic=True)
@@ -134,15 +134,16 @@ def add_equation(doc, label, eq_text):
     format_run(run_label, font_name="Times New Roman", size_pt=10)
     return p
 
-def add_figure(doc, image_path, caption_text, figure_num):
+def add_figure(doc, image_path, caption_text, figure_num, width_in=2.9):
     p_img = doc.add_paragraph()
     p_img.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    p_img.paragraph_format.space_before = Pt(8)
-    p_img.paragraph_format.space_after = Pt(4)
+    p_img.paragraph_format.space_before = Pt(6)
+    p_img.paragraph_format.space_after = Pt(2)
+    p_img.paragraph_format.keep_with_next = True
     
     if os.path.exists(image_path):
         try:
-            p_img.add_run().add_picture(image_path, width=Inches(3.2))
+            p_img.add_run().add_picture(image_path, width=Inches(width_in))
         except Exception as e:
             p_img.add_run(f"[Error loading image: {e}]")
     else:
@@ -150,7 +151,7 @@ def add_figure(doc, image_path, caption_text, figure_num):
         
     p_cap = doc.add_paragraph()
     p_cap.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    p_cap.paragraph_format.space_after = Pt(8)
+    p_cap.paragraph_format.space_after = Pt(6)
     run_cap = p_cap.add_run(f"Fig. {figure_num}. {caption_text}")
     format_run(run_cap, font_name="Times New Roman", size_pt=8)
 
@@ -159,7 +160,7 @@ def add_reference(doc, num, text):
     p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
     p.paragraph_format.left_indent = Inches(0.25)
     p.paragraph_format.first_line_indent = Inches(-0.25)
-    p.paragraph_format.space_after = Pt(3)
+    p.paragraph_format.space_after = Pt(2)
     
     bookmark_name = f"ref_{num}"
     add_bookmark(p, bookmark_name, num)
@@ -207,22 +208,22 @@ def build_proposed_model_paper(target_dir):
     # Page Margins
     sec1 = doc.sections[0]
     sec1.top_margin = Inches(0.75)
-    sec1.bottom_margin = Inches(1.0)
+    sec1.bottom_margin = Inches(0.85)
     sec1.left_margin = Inches(0.625)
     sec1.right_margin = Inches(0.625)
     
     # Title
     p_title = doc.add_paragraph()
     p_title.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    p_title.paragraph_format.space_before = Pt(24)
-    p_title.paragraph_format.space_after = Pt(12)
+    p_title.paragraph_format.space_before = Pt(18)
+    p_title.paragraph_format.space_after = Pt(10)
     run_title = p_title.add_run("An Explainable and Sequence-Preserving BERT-BiLSTM Framework for\nOnline Recruitment Fraud Detection")
-    format_run(run_title, font_name="Times New Roman", size_pt=24, bold=True)
+    format_run(run_title, font_name="Times New Roman", size_pt=22, bold=True)
     
     # Author
     p_author = doc.add_paragraph()
     p_author.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    p_author.paragraph_format.space_after = Pt(18)
+    p_author.paragraph_format.space_after = Pt(14)
     run_author = p_author.add_run(
         "Akhilesh\n"
         "Department of Computer Science and Engineering\n"
@@ -230,20 +231,20 @@ def build_proposed_model_paper(target_dir):
         "India\n"
         "email@example.com"
     )
-    format_run(run_author, font_name="Times New Roman", size_pt=11)
+    format_run(run_author, font_name="Times New Roman", size_pt=10.5)
     
     # Two Columns Section
     sec2 = doc.add_section(WD_SECTION.CONTINUOUS)
     sec2.top_margin = Inches(0.75)
-    sec2.bottom_margin = Inches(1.0)
+    sec2.bottom_margin = Inches(0.85)
     sec2.left_margin = Inches(0.625)
     sec2.right_margin = Inches(0.625)
-    set_section_columns(sec2, num_cols=2, space_pt=18)
+    set_section_columns(sec2, num_cols=2, space_pt=14)
     
     # Abstract
     p_abs = doc.add_paragraph()
     p_abs.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
-    p_abs.paragraph_format.space_after = Pt(6)
+    p_abs.paragraph_format.space_after = Pt(5)
     p_abs.paragraph_format.first_line_indent = Inches(0.15)
     
     run_abs_tag = p_abs.add_run("Abstract---")
@@ -269,7 +270,7 @@ def build_proposed_model_paper(target_dir):
     # Keywords
     p_key = doc.add_paragraph()
     p_key.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
-    p_key.paragraph_format.space_after = Pt(12)
+    p_key.paragraph_format.space_after = Pt(10)
     p_key.paragraph_format.first_line_indent = Inches(0.15)
     
     run_key_tag = p_key.add_run("Keywords---")
@@ -369,7 +370,7 @@ def build_proposed_model_paper(target_dir):
     
     # Figure 1: Architecture
     add_figure(doc, os.path.join(target_dir, "architecture_proposed.png"), 
-               "System Architecture of the Proposed Hybrid BERT-BiLSTM framework.", 1)
+               "System Architecture of the Proposed Hybrid BERT-BiLSTM framework.", 1, width_in=2.9)
     
     add_heading_2(doc, "A. Robust Concatenation")
     add_body_paragraph(doc,
@@ -507,8 +508,8 @@ def build_proposed_model_paper(target_dir):
                 
     p_t1 = doc.add_paragraph()
     p_t1.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    p_t1.paragraph_format.space_before = Pt(4)
-    p_t1.paragraph_format.space_after = Pt(8)
+    p_t1.paragraph_format.space_before = Pt(3)
+    p_t1.paragraph_format.space_after = Pt(6)
     run_t1 = p_t1.add_run("TABLE I. Comparison of Proposed Model with Baseline Models")
     format_run(run_t1, font_name="Times New Roman", size_pt=8, bold=True)
     
@@ -525,7 +526,7 @@ def build_proposed_model_paper(target_dir):
     # Figure 2: ROC Curves
     results_dir = r"d:\M.Sc (Data Science)\Research - Fake Job Detection\results"
     add_figure(doc, os.path.join(results_dir, "roc_curves.png"), 
-               "Receiver Operating Characteristic (ROC) Comparison across baseline and proposed models.", 2)
+               "Receiver Operating Characteristic (ROC) Comparison across baseline and proposed models.", 2, width_in=2.9)
                
     add_heading_2(doc, "B. Ablation Study")
     add_body_paragraph(doc,
@@ -571,8 +572,8 @@ def build_proposed_model_paper(target_dir):
                 
     p_t2 = doc.add_paragraph()
     p_t2.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    p_t2.paragraph_format.space_before = Pt(4)
-    p_t2.paragraph_format.space_after = Pt(8)
+    p_t2.paragraph_format.space_before = Pt(3)
+    p_t2.paragraph_format.space_after = Pt(6)
     run_t2 = p_t2.add_run("TABLE II. Ablation Study of Proposed Architecture")
     format_run(run_t2, font_name="Times New Roman", size_pt=8, bold=True)
     
@@ -610,7 +611,7 @@ def build_proposed_model_paper(target_dir):
     
     # Figure 3: SHAP
     add_figure(doc, os.path.join(results_dir, "shap_importance.png"), 
-               "Mean SHAP Values of top fraudulent and genuine text indicators.", 3)
+               "Mean SHAP Values of top fraudulent and genuine text indicators.", 3, width_in=2.9)
     
     add_heading_2(doc, "F. Error Analysis")
     add_body_paragraph(doc,
@@ -622,7 +623,7 @@ def build_proposed_model_paper(target_dir):
     
     # Figure 4: Confusion Matrix
     add_figure(doc, os.path.join(results_dir, "confusion_matrix_proposed.png"), 
-               "Confusion Matrix for the proposed hybrid BERT-BiLSTM model.", 4)
+               "Confusion Matrix for the proposed hybrid BERT-BiLSTM model.", 4, width_in=2.7)
     
     # Section VI: Conclusion
     add_heading_1(doc, "VI.  CONCLUSION AND FUTURE SCOPE")
@@ -640,8 +641,13 @@ def build_proposed_model_paper(target_dir):
         add_reference(doc, idx, ref)
         
     doc_path = os.path.join(target_dir, "paper.docx")
-    doc.save(doc_path)
-    print(f"Paper 1 (BERT-BiLSTM) saved to {doc_path}!")
+    try:
+        doc.save(doc_path)
+        print(f"Paper 1 (BERT-BiLSTM) saved to {doc_path}!")
+    except PermissionError:
+        fallback_path = os.path.join(target_dir, "paper_latest.docx")
+        doc.save(fallback_path)
+        print(f"paper.docx is open in Word! Saved to fallback: {fallback_path}")
 
 def build_standalone_bert_paper(target_dir):
     """Build Paper 2: Standalone BERT Paper (Proposed model is BERT standalone, no Bi-LSTM mentioned)."""
@@ -650,22 +656,22 @@ def build_standalone_bert_paper(target_dir):
     # Page Margins
     sec1 = doc.sections[0]
     sec1.top_margin = Inches(0.75)
-    sec1.bottom_margin = Inches(1.0)
+    sec1.bottom_margin = Inches(0.85)
     sec1.left_margin = Inches(0.625)
     sec1.right_margin = Inches(0.625)
     
     # Title
     p_title = doc.add_paragraph()
     p_title.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    p_title.paragraph_format.space_before = Pt(24)
-    p_title.paragraph_format.space_after = Pt(12)
+    p_title.paragraph_format.space_before = Pt(18)
+    p_title.paragraph_format.space_after = Pt(10)
     run_title = p_title.add_run("An Explainable and Context-Aware BERT Framework for\nOnline Recruitment Fraud Detection")
-    format_run(run_title, font_name="Times New Roman", size_pt=24, bold=True)
+    format_run(run_title, font_name="Times New Roman", size_pt=22, bold=True)
     
     # Author
     p_author = doc.add_paragraph()
     p_author.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    p_author.paragraph_format.space_after = Pt(18)
+    p_author.paragraph_format.space_after = Pt(14)
     run_author = p_author.add_run(
         "Akhilesh\n"
         "Department of Computer Science and Engineering\n"
@@ -673,20 +679,20 @@ def build_standalone_bert_paper(target_dir):
         "India\n"
         "email@example.com"
     )
-    format_run(run_author, font_name="Times New Roman", size_pt=11)
+    format_run(run_author, font_name="Times New Roman", size_pt=10.5)
     
     # Two Columns Section
     sec2 = doc.add_section(WD_SECTION.CONTINUOUS)
     sec2.top_margin = Inches(0.75)
-    sec2.bottom_margin = Inches(1.0)
+    sec2.bottom_margin = Inches(0.85)
     sec2.left_margin = Inches(0.625)
     sec2.right_margin = Inches(0.625)
-    set_section_columns(sec2, num_cols=2, space_pt=18)
+    set_section_columns(sec2, num_cols=2, space_pt=14)
     
     # Abstract
     p_abs = doc.add_paragraph()
     p_abs.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
-    p_abs.paragraph_format.space_after = Pt(6)
+    p_abs.paragraph_format.space_after = Pt(5)
     p_abs.paragraph_format.first_line_indent = Inches(0.15)
     
     run_abs_tag = p_abs.add_run("Abstract---")
@@ -710,7 +716,7 @@ def build_standalone_bert_paper(target_dir):
     # Keywords
     p_key = doc.add_paragraph()
     p_key.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
-    p_key.paragraph_format.space_after = Pt(12)
+    p_key.paragraph_format.space_after = Pt(10)
     p_key.paragraph_format.first_line_indent = Inches(0.15)
     
     run_key_tag = p_key.add_run("Keywords---")
@@ -804,7 +810,7 @@ def build_standalone_bert_paper(target_dir):
     
     # Figure 1: Architecture
     add_figure(doc, os.path.join(target_dir, "architecture_bert.png"), 
-               "System Architecture of the Proposed Explainable BERT model.", 1)
+               "System Architecture of the Proposed Explainable BERT model.", 1, width_in=2.9)
     
     add_heading_2(doc, "A. Robust Concatenation")
     add_body_paragraph(doc,
@@ -919,8 +925,8 @@ def build_standalone_bert_paper(target_dir):
                 
     p_t1 = doc.add_paragraph()
     p_t1.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    p_t1.paragraph_format.space_before = Pt(4)
-    p_t1.paragraph_format.space_after = Pt(8)
+    p_t1.paragraph_format.space_before = Pt(3)
+    p_t1.paragraph_format.space_after = Pt(6)
     run_t1 = p_t1.add_run("TABLE I. Comparison of Proposed Model with Baseline Models")
     format_run(run_t1, font_name="Times New Roman", size_pt=8, bold=True)
     
@@ -935,7 +941,7 @@ def build_standalone_bert_paper(target_dir):
     # Figure 2: ROC Curves
     results_dir = r"d:\M.Sc (Data Science)\Research - Fake Job Detection\results"
     add_figure(doc, os.path.join(results_dir, "roc_curves.png"), 
-               "ROC Curves comparison on the test set.", 2)
+               "ROC Curves comparison on the test set.", 2, width_in=2.9)
                
     add_heading_2(doc, "B. Cross-Domain Generalization Analysis")
     add_body_paragraph(doc,
@@ -963,7 +969,7 @@ def build_standalone_bert_paper(target_dir):
     
     # Figure 3: SHAP
     add_figure(doc, os.path.join(results_dir, "shap_importance.png"), 
-               "Mean SHAP Values of top fraudulent and genuine text indicators.", 3)
+               "Mean SHAP Values of top fraudulent and genuine text indicators.", 3, width_in=2.9)
     
     add_heading_2(doc, "E. Error Analysis")
     add_body_paragraph(doc,
@@ -975,7 +981,7 @@ def build_standalone_bert_paper(target_dir):
     
     # Figure 4: Confusion Matrix
     add_figure(doc, os.path.join(results_dir, "confusion_matrix_proposed.png"), 
-               "Confusion Matrix for the proposed BERT model.", 4)
+               "Confusion Matrix for the proposed BERT model.", 4, width_in=2.7)
     
     # Section VI: Conclusion
     add_heading_1(doc, "VI.  CONCLUSION AND FUTURE SCOPE")
@@ -993,8 +999,13 @@ def build_standalone_bert_paper(target_dir):
         add_reference(doc, idx, ref)
         
     doc_path = os.path.join(target_dir, "paper_bert_standalone.docx")
-    doc.save(doc_path)
-    print(f"Paper 2 (Standalone BERT) saved to {doc_path}!")
+    try:
+        doc.save(doc_path)
+        print(f"Paper 2 (Standalone BERT) saved to {doc_path}!")
+    except PermissionError:
+        fallback_path = os.path.join(target_dir, "paper_bert_standalone_latest.docx")
+        doc.save(fallback_path)
+        print(f"paper_bert_standalone.docx is open in Word! Saved to fallback: {fallback_path}")
 
 def main():
     target_dir = r"d:\M.Sc (Data Science)\Research - Fake Job Detection\paper"
