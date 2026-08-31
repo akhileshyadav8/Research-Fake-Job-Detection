@@ -1,0 +1,347 @@
+Total slides in template: 10
+Slide width: 13.33 in, Slide height: 7.50 in
+
+==================== SLIDE 1 ====================
+Layout: 'Title and Content'
+
+  Shape 0: name='Rectangle 30', type=AUTO_SHAPE (1)
+    Position: left=-0.00in, top=6.62in, width=13.34in, height=0.48in
+
+  Shape 1: name='Rectangle 31', type=AUTO_SHAPE (1)
+    Position: left=0.33in, top=6.45in, width=0.05in, height=0.67in
+
+  Shape 2: name='Slide Number Placeholder 2', type=TEXT_BOX (17)
+    Position: left=9.58in, top=7.12in, width=3.00in, height=0.40in
+
+  Shape 3: name='Right Triangle 45', type=AUTO_SHAPE (1)
+    Position: left=10.40in, top=6.50in, width=1.41in, height=1.27in
+
+  Shape 4: name='Right Triangle 36', type=AUTO_SHAPE (1)
+    Position: left=7.70in, top=-0.07in, width=5.63in, height=6.40in
+
+  Shape 5: name='Rectangle 44', type=AUTO_SHAPE (1)
+    Position: left=2.93in, top=1.55in, width=7.47in, height=3.06in
+
+  Shape 6: name='Right Triangle 42', type=AUTO_SHAPE (1)
+    Position: left=10.75in, top=5.83in, width=2.59in, height=1.75in
+
+  Shape 7: name='TextBox 35', type=TEXT_BOX (17)
+    Position: left=7.53in, top=6.58in, width=5.39in, height=0.71in
+    Full Text:
+DISCOVER . LEARN . EMPOWER
+      P0 (level=0): 'DISCOVER . ' (size=20.0, b=True, i=None) 'LEARN' (size=20.0, b=True, i=None) ' . EMPOWER' (size=20.0, b=True, i=None)
+
+  Shape 8: name='Rectangle 51', type=AUTO_SHAPE (1)
+    Position: left=7.53in, top=6.61in, width=0.05in, height=0.41in
+
+  Shape 9: name='TextBox 52', type=TEXT_BOX (17)
+    Position: left=0.48in, top=6.58in, width=6.43in, height=0.46in
+    Full Text:
+Department of Mathematics
+      P0 (level=0): 'Department of Mathematics' (size=24.0, b=True, i=False)
+
+  Shape 10: name='TextBox 25', type=TEXT_BOX (17)
+    Position: left=1.97in, top=1.85in, width=9.38in, height=1.92in
+    Full Text:
+Fraud-BERT: Transformer Based Context Aware Online Recruitment Fraud Detection
+      P0 (level=0): 'Fraud-BERT: Transformer Based Context Aware Online Recruitment Fraud Detection' (size=34.0, b=True, i=False)
+
+  Shape 11: name='Slide Number Placeholder 14', type=PLACEHOLDER (14), Placeholder=SLIDE_NUMBER (13)
+    Position: left=9.42in, top=6.95in, width=3.00in, height=0.40in
+    Full Text:
+1
+      P0 (level=0): 
+
+  Shape 12: name='TextBox 4', type=TEXT_BOX (17)
+    Position: left=1.51in, top=4.89in, width=3.88in, height=1.11in
+    Full Text:
+Submitted by: 
+STUDENT NAME: Akhilesh Yadav
+UID: 25MSM40018
+      P0 (level=0): 'Submitted by: ' (size=20.0, b=True, i=False)
+      P1 (level=0): 'STUDENT NAME: ' (size=20.0, b=True, i=False) 'Akhilesh Yadav' (size=20.0, b=False, i=False)
+      P2 (level=0): 'UID: ' (size=20.0, b=True, i=False) '25MSM40018' (size=20.0, b=False, i=False)
+
+  Shape 13: name='TextBox 5', type=TEXT_BOX (17)
+    Position: left=7.58in, top=4.93in, width=4.50in, height=1.11in
+    Full Text:
+Under the Supervision of: 
+SUPERVISOR’S NAME: Dr. Sunil Kumar
+      P0 (level=0): 'Under the Supervision of: ' (size=20.0, b=True, i=False)
+      P1 (level=0): 'SUPERVISOR’S NAME: ' (size=20.0, b=True, i=False) 'Dr. Sunil Kumar' (size=20.0, b=False, i=False)
+==================== SLIDE 2 ====================
+Layout: 'Title and Content'
+
+  Shape 0: name='Title 1', type=PLACEHOLDER (14), Placeholder=TITLE (1)
+    Position: left=0.87in, top=0.38in, width=2.29in, height=0.87in
+    Full Text:
+Content
+      P0 (level=0): 'Content' (size=40.0, b=True, i=False)
+
+  Shape 1: name='Content Placeholder 2', type=PLACEHOLDER (14), Placeholder=OBJECT (7)
+    Position: left=0.80in, top=1.73in, width=11.50in, height=5.17in
+    Full Text:
+Aim: To study and evaluate a transformer-based context-aware framework (Fraud-BERT) for automated detection of fraudulent job postings.
+The system applies fine-tuned Bidirectional Encoder Representations from Transformers (BERT) to classify whether an online recruitment advertisement is legitimate or fraudulent.
+Online Recruitment Fraud (ORF) is an escalating global cyber-threat causing financial extortion, identity theft, and data compromise among job applicants.
+BERT utilizes multi-head bidirectional self-attention mechanisms to capture complex semantic dependencies and contextual meanings across entire job descriptions, overcoming the limitations of static word embeddings.
+      P0 (level=0): 'Aim: ' (size=22.0, b=True, i=False) 'To study and evaluate a transformer-based context-aware framework (Fraud-BERT) for automated detection of fraudulent job postings.' (size=22.0, b=False, i=False)
+      P1 (level=0): 'The system applies fine-tuned Bidirectional Encoder Representations from Transformers (BERT) to classify whether an online recruitment advertisement is legitimate or fraudulent.' (size=22.0, b=False, i=False)
+      P2 (level=0): 'Online Recruitment Fraud (ORF) is an escalating global cyber-threat causing financial extortion, identity theft, and data compromise among job applicants.' (size=22.0, b=False, i=False)
+      P3 (level=0): 'BERT utilizes multi-head bidirectional self-attention mechanisms to capture complex semantic dependencies and contextual meanings across entire job descriptions, overcoming the limitations of static word embeddings.' (size=22.0, b=False, i=False)
+
+  Shape 2: name='Slide Number Placeholder 3', type=PLACEHOLDER (14), Placeholder=SLIDE_NUMBER (13)
+    Position: left=9.42in, top=6.95in, width=3.00in, height=0.40in
+    Full Text:
+2
+      P0 (level=0): 
+==================== SLIDE 3 ====================
+Layout: 'Title and Content'
+
+  Shape 0: name='Title 1', type=PLACEHOLDER (14), Placeholder=TITLE (1)
+    Position: left=0.83in, top=0.36in, width=11.50in, height=0.78in
+    Full Text:
+Related Five-Research Paper
+      P0 (level=0): 'Related Five-Research Paper' (size=36.0, b=True, i=False)
+
+  Shape 1: name='Slide Number Placeholder 3', type=PLACEHOLDER (14), Placeholder=SLIDE_NUMBER (13)
+    Position: left=9.42in, top=6.95in, width=3.00in, height=0.40in
+    Full Text:
+3
+      P0 (level=0): 
+
+  Shape 2: name='Table 6', type=TABLE (19)
+    Position: left=0.92in, top=1.43in, width=11.10in, height=5.40in
+    Table:
+      Rows=6, Cols=4
+      Row 0: ['Paper No', 'Title', 'Authors', 'DOI']
+      Row 1: ['1', 'Fraud-BERT: Transformer Based Context Aware Online Recruitment Fraud Detection', 'K. Taneja, J. Vashishtha, S. Ratnoo', '10.1007/s44425-025-00109-x']
+      Row 2: ['2', 'Detecting Fake Job Postings Using Bidirectional LSTM', 'A.S. Pillai', '10.56726/IRJMETS34628']
+      Row 3: ['3', 'A Machine Learning Approach to Detecting Fraudulent Job Types', 'M. Naudé, K.J. Adebayo, R. Nanda', '10.1007/s00146-021-01314-z']
+      Row 4: ['4', 'Detecting Fraud Job Recruitment Using Features Reflecting from Real-world Knowledge of Fraud', 'B. Chiraratanasopha, T. Chay-intr', '10.55003/cast.2022.06.22.015']
+      Row 5: ['5', 'Online Recruitment Fraud Detection Using Deep Learning Approaches', 'G. Varshitha, K. Sowmya, K. Sheshma', '10.36948/ijfmr.2026.v08i02.14582']
+==================== SLIDE 4 ====================
+Layout: 'Title and Content'
+
+  Shape 0: name='Title 1', type=PLACEHOLDER (14), Placeholder=TITLE (1)
+    Position: left=0.92in, top=0.32in, width=11.50in, height=1.45in
+    Full Text:
+Fraud-BERT: Transformer Based Context Aware Online Recruitment Fraud Detection
+DOI: 10.1007/s44425-025-00109-x
+      P0 (level=0): 'Fraud-BERT: Transformer Based Context Aware Online Recruitment Fraud Detection
+' (size=30.0, b=True, i=False) 'DOI: 10.1007/s44425-025-00109-x' (size=18.0, b=False, i=True)
+
+  Shape 1: name='Content Placeholder 2', type=PLACEHOLDER (14), Placeholder=OBJECT (7)
+    Position: left=0.92in, top=2.64in, width=11.50in, height=4.05in
+    Full Text:
+Goal: To develop a high-accuracy, context-aware online recruitment fraud detection framework using fine-tuned BERT transformer architecture.
+Why this study is important:
+• Online job scams deceive vulnerable job seekers, causing severe monetary fraud and confidential identity theft.
+• Traditional machine learning models (LR, SVM, RF) rely on bag-of-words or static embeddings that ignore linguistic context and syntax.
+• Transformer-based self-attention enables deep contextual awareness, significantly reducing false positives and improving detection reliability on imbalanced job post data.
+      P0 (level=0): 'Goal: ' (size=22.0, b=True, i=False) 'To develop a high-accuracy, context-aware online recruitment fraud detection framework using fine-tuned BERT transformer architecture.' (size=22.0, b=False, i=False)
+      P1 (level=0): 'Why this study is important:' (size=22.0, b=True, i=False)
+      P2 (level=0): '• Online job scams deceive vulnerable job seekers, causing severe monetary fraud and confidential identity theft.' (size=18.0, b=False, i=False)
+      P3 (level=0): '• Traditional machine learning models (LR, SVM, RF) rely on bag-of-words or static embeddings that ignore linguistic context and syntax.' (size=18.0, b=False, i=False)
+      P4 (level=0): '• Transformer-based self-attention enables deep contextual awareness, significantly reducing false positives and improving detection reliability on imbalanced job post data.' (size=18.0, b=False, i=False)
+
+  Shape 2: name='Slide Number Placeholder 3', type=PLACEHOLDER (14), Placeholder=SLIDE_NUMBER (13)
+    Position: left=9.42in, top=6.95in, width=3.00in, height=0.40in
+    Full Text:
+4
+      P0 (level=0): 
+
+  Shape 3: name='TextBox 4', type=TEXT_BOX (17)
+    Position: left=0.92in, top=1.77in, width=4.20in, height=0.50in
+    Full Text:
+Authors: K. Taneja, J. Vashishtha, S. Ratnoo
+      P0 (level=0): 'Authors: ' (size=22.0, b=True, i=False) 'K. Taneja, J. Vashishtha, S. Ratnoo' (size=22.0, b=False, i=False)
+==================== SLIDE 5 ====================
+Layout: 'Title and Content'
+
+  Shape 0: name='Title 1', type=PLACEHOLDER (14), Placeholder=TITLE (1)
+    Position: left=0.92in, top=0.40in, width=11.50in, height=0.80in
+    Full Text:
+Machine Learning Methods Used
+      P0 (level=0): 'Machine Learning Methods Used' (size=40.0, b=True, i=False)
+
+  Shape 1: name='Content Placeholder 2', type=PLACEHOLDER (14), Placeholder=OBJECT (7)
+    Position: left=0.92in, top=1.59in, width=11.50in, height=5.56in
+    Full Text:
+The study uses:
+Fraud-BERT (Bidirectional Encoder Representations from Transformers)
+• Pre-trained multi-layer bidirectional Transformer encoder network
+• Extracts dynamic token representations via masked language modeling
+• Captures full contextual dependencies from both left-to-right and right-to-left
+• Fine-tuned with classification head on domain-specific recruitment data
+Transformer Architecture Components:
+• Input Layer: Token, Positional, and Segment Embeddings
+• 12 Encoder Blocks with Multi-Head Self-Attention mechanisms
+• Feed-Forward Layers with Dropout, Layer Normalization, and Residual Connections
+• Classification Head: Linear dense layer with Softmax probability output
+      P0 (level=0): 'The study uses:' (size=20.0, b=False, i=False)
+      P1 (level=0): 'Fraud-BERT (Bidirectional Encoder Representations from Transformers)' (size=20.0, b=True, i=False)
+      P2 (level=0): '• Pre-trained multi-layer bidirectional Transformer encoder network' (size=18.0, b=False, i=False)
+      P3 (level=0): '• Extracts dynamic token representations via masked language modeling' (size=18.0, b=False, i=False)
+      P4 (level=0): '• Captures full contextual dependencies from both left-to-right and right-to-left' (size=18.0, b=False, i=False)
+      P5 (level=0): '• Fine-tuned with classification head on domain-specific recruitment data' (size=18.0, b=False, i=False)
+      P6 (level=0): 'Transformer Architecture Components:' (size=20.0, b=True, i=False)
+      P7 (level=0): '• Input Layer: Token, Positional, and Segment Embeddings' (size=18.0, b=False, i=False)
+      P8 (level=0): '• 12 Encoder Blocks with Multi-Head Self-Attention mechanisms' (size=18.0, b=False, i=False)
+      P9 (level=0): '• Feed-Forward Layers with Dropout, Layer Normalization, and Residual Connections' (size=18.0, b=False, i=False)
+      P10 (level=0): '• Classification Head: Linear dense layer with Softmax probability output' (size=18.0, b=False, i=False)
+
+  Shape 2: name='Slide Number Placeholder 3', type=PLACEHOLDER (14), Placeholder=SLIDE_NUMBER (13)
+    Position: left=9.42in, top=6.95in, width=3.00in, height=0.40in
+    Full Text:
+5
+      P0 (level=0): 
+==================== SLIDE 6 ====================
+Layout: 'Title and Content'
+
+  Shape 0: name='Title 1', type=PLACEHOLDER (14), Placeholder=TITLE (1)
+    Position: left=0.92in, top=0.24in, width=7.27in, height=1.08in
+    Full Text:
+Proposed Prediction Model
+      P0 (level=0): 'Proposed Prediction Model' (size=40.0, b=True, i=False)
+
+  Shape 1: name='Content Placeholder 2', type=PLACEHOLDER (14), Placeholder=OBJECT (7)
+    Position: left=0.92in, top=1.43in, width=11.50in, height=5.52in
+    Full Text:
+The system works in stages:
+Data Preprocessing & Tokenization
+• Text cleaning, special character removal, and WordPiece tokenization with max sequence length of 512 tokens
+Contextual Representation Generation
+• Extracting 768-dimensional bidirectional contextual embedding vectors for each input token
+Model Fine-Tuning & Training
+• Training Fraud-BERT end-to-end with AdamW optimizer, learning rate warmup, and binary cross-entropy loss
+Prediction & Classification
+• Model outputs binary classification probability: 0 (Legitimate Job) vs. 1 (Fraudulent Job)
+Performance Evaluation
+• Evaluated on Accuracy, Precision, Recall, Macro F1-Score, and ROC-AUC metrics
+      P0 (level=0): 'The system works in stages:' (size=20.0, b=False, i=False)
+      P1 (level=0): 'Data Preprocessing & Tokenization' (size=19.0, b=True, i=False)
+      P2 (level=0): '• Text cleaning, special character removal, and WordPiece tokenization with max sequence length of 512 tokens' (size=16.0, b=False, i=False)
+      P3 (level=0): 'Contextual Representation Generation' (size=19.0, b=True, i=False)
+      P4 (level=0): '• Extracting 768-dimensional bidirectional contextual embedding vectors for each input token' (size=16.0, b=False, i=False)
+      P5 (level=0): 'Model Fine-Tuning & Training' (size=19.0, b=True, i=False)
+      P6 (level=0): '• Training Fraud-BERT end-to-end with AdamW optimizer, learning rate warmup, and binary cross-entropy loss' (size=16.0, b=False, i=False)
+      P7 (level=0): 'Prediction & Classification' (size=19.0, b=True, i=False)
+      P8 (level=0): '• Model outputs binary classification probability: 0 (Legitimate Job) vs. 1 (Fraudulent Job)' (size=16.0, b=False, i=False)
+      P9 (level=0): 'Performance Evaluation' (size=19.0, b=True, i=False)
+      P10 (level=0): '• Evaluated on Accuracy, Precision, Recall, Macro F1-Score, and ROC-AUC metrics' (size=16.0, b=False, i=False)
+
+  Shape 2: name='Slide Number Placeholder 3', type=PLACEHOLDER (14), Placeholder=SLIDE_NUMBER (13)
+    Position: left=9.42in, top=6.95in, width=3.00in, height=0.40in
+    Full Text:
+6
+      P0 (level=0): 
+==================== SLIDE 7 ====================
+Layout: 'Title and Content'
+
+  Shape 0: name='Title 1', type=PLACEHOLDER (14), Placeholder=TITLE (1)
+    Position: left=0.92in, top=0.21in, width=11.50in, height=1.06in
+    Full Text:
+Dataset Used
+      P0 (level=0): 'Dataset Used' (size=40.0, b=True, i=False)
+
+  Shape 1: name='Slide Number Placeholder 3', type=PLACEHOLDER (14), Placeholder=SLIDE_NUMBER (13)
+    Position: left=9.42in, top=6.95in, width=3.00in, height=0.40in
+    Full Text:
+7
+      P0 (level=0): 
+
+  Shape 2: name='Rectangle 1', type=PLACEHOLDER (14), Placeholder=OBJECT (7)
+    Position: left=0.92in, top=1.42in, width=8.78in, height=5.91in
+    Full Text:
+Source: Employment Scam Aegean Dataset (EMSCAD) / Kaggle Repository
+Data Details:
+• Contains 17,880 real-world job advertisement records
+• Textual attributes: Job Title, Company Profile, Description, Requirements, Benefits
+• Categorical metadata: Telecommuting, Has Company Logo, Has Questions, Employment Type
+Target Class Distribution (Severe Imbalance):
+• 0 → Legitimate Job Postings (17,014 samples ~ 95.16%)
+• 1 → Fraudulent Job Postings (866 samples ~ 4.84%)
+      P0 (level=0): 'Source: ' (size=22.0, b=True, i=False) 'Employment Scam Aegean Dataset (EMSCAD) / Kaggle Repository' (size=20.0, b=False, i=False)
+      P1 (level=0): 'Data Details:' (size=22.0, b=True, i=False)
+      P2 (level=0): '• Contains 17,880 real-world job advertisement records' (size=18.0, b=False, i=False)
+      P3 (level=0): '• Textual attributes: Job Title, Company Profile, Description, Requirements, Benefits' (size=18.0, b=False, i=False)
+      P4 (level=0): '• Categorical metadata: Telecommuting, Has Company Logo, Has Questions, Employment Type' (size=18.0, b=False, i=False)
+      P5 (level=0): 'Target Class Distribution (Severe Imbalance):' (size=22.0, b=True, i=False)
+      P6 (level=0): '• 0 → Legitimate Job Postings (17,014 samples ~ 95.16%)' (size=18.0, b=False, i=False)
+      P7 (level=0): '• 1 → Fraudulent Job Postings (866 samples ~ 4.84%)' (size=18.0, b=False, i=False)
+==================== SLIDE 8 ====================
+Layout: 'Title and Content'
+
+  Shape 0: name='Title 1', type=PLACEHOLDER (14), Placeholder=TITLE (1)
+    Position: left=0.92in, top=0.33in, width=7.00in, height=1.01in
+    Full Text:
+Results
+      P0 (level=0): 'Results' (size=40.0, b=True, i=False)
+
+  Shape 1: name='Content Placeholder 2', type=PLACEHOLDER (14), Placeholder=OBJECT (7)
+    Position: left=0.92in, top=1.73in, width=11.50in, height=5.03in
+    Full Text:
+Fraud-BERT achieved an overall classification accuracy of 99.0% (0.99).
+• Macro Precision: 94.0% (0.94)
+• Macro Recall: 92.0% (0.92)
+• Macro F1-Score: 93.0% (0.93)
+• ROC-AUC Score: 0.99
+Conclusion: Fraud-BERT significantly outperforms traditional classifiers (Logistic Regression, Random Forest, SVM) by capturing bidirectional semantic context across deceptive text patterns.
+      P0 (level=0): 'Fraud-BERT achieved an overall classification accuracy of ' (size=22.0, b=False, i=False) '99.0% (0.99)' (size=22.0, b=True, i=False) '.' (size=22.0, b=False, i=False)
+      P1 (level=0): '• Macro Precision: ' (size=20.0, b=False, i=False) '94.0% (0.94)' (size=20.0, b=True, i=False)
+      P2 (level=0): '• Macro Recall: ' (size=20.0, b=False, i=False) '92.0% (0.92)' (size=20.0, b=True, i=False)
+      P3 (level=0): '• Macro F1-Score: ' (size=20.0, b=False, i=False) '93.0% (0.93)' (size=20.0, b=True, i=False)
+      P4 (level=0): '• ROC-AUC Score: ' (size=20.0, b=False, i=False) '0.99' (size=20.0, b=True, i=False)
+      P5 (level=0): 'Conclusion: Fraud-BERT significantly outperforms traditional classifiers (Logistic Regression, Random Forest, SVM) by capturing bidirectional semantic context across deceptive text patterns.' (size=20.0, b=False, i=False)
+
+  Shape 2: name='Slide Number Placeholder 3', type=PLACEHOLDER (14), Placeholder=SLIDE_NUMBER (13)
+    Position: left=9.42in, top=6.95in, width=3.00in, height=0.40in
+    Full Text:
+8
+      P0 (level=0): 
+==================== SLIDE 9 ====================
+Layout: 'Title and Content'
+
+  Shape 0: name='Title 1', type=PLACEHOLDER (14), Placeholder=TITLE (1)
+    Position: left=0.92in, top=0.40in, width=11.50in, height=0.76in
+    Full Text:
+References
+      P0 (level=0): 'References' (size=40.0, b=True, i=False)
+
+  Shape 1: name='Content Placeholder 2', type=PLACEHOLDER (14), Placeholder=OBJECT (7)
+    Position: left=0.92in, top=1.48in, width=11.50in, height=5.62in
+    Full Text:
+Taneja, K., Vashishtha, J., & Ratnoo, S. (2025). Fraud-BERT: Transformer based context aware online recruitment fraud detection. Discover Computing, 28(9), 1–16. https://doi.org/10.1007/s44425-025-00109-x
+Pillai, A. S. (2023). Detecting fake job postings using bidirectional LSTM. International Research Journal of Modernization in Engineering Technology and Science, 5(3), 3883–3890. https://doi.org/10.56726/IRJMETS34628
+Naudé, M., Adebayo, K. J., & Nanda, R. (2023). A machine learning approach to detecting fraudulent job types. AI & SOCIETY, 38(3), 1013–1024. https://doi.org/10.1007/s00146-021-01314-z
+Chiraratanasopha, B., & Chay-intr, T. (2022). Detecting fraud job recruitment using features reflecting from real-world knowledge of fraud. Current Applied Science and Technology, 22(6), 1–12. https://doi.org/10.55003/cast.2022.06.22.015
+Varshitha, G., Sowmya, K., Sheshma, K., Sowmya, K., & Manikandan, R. A. (2026). Online recruitment fraud detection using deep learning approaches. International Journal for Multidisciplinary Research (IJFMR), 8(2), 1–9. https://doi.org/10.36948/ijfmr.2026.v08i02.14582
+      P0 (level=0): 'Taneja, K., Vashishtha, J., & Ratnoo, S. (2025). Fraud-BERT: Transformer based context aware online recruitment fraud detection. ' (size=15.0, b=False, i=False) 'Discover Computing' (size=15.0, b=False, i=True) ', ' (size=15.0, b=False, i=False) '28' (size=15.0, b=False, i=True) '(9), 1–16. https://doi.org/10.1007/s44425-025-00109-x' (size=15.0, b=False, i=False)
+      P1 (level=0): 'Pillai, A. S. (2023). Detecting fake job postings using bidirectional LSTM. ' (size=15.0, b=False, i=False) 'International Research Journal of Modernization in Engineering Technology and Science' (size=15.0, b=False, i=True) ', ' (size=15.0, b=False, i=False) '5' (size=15.0, b=False, i=True) '(3), 3883–3890. https://doi.org/10.56726/IRJMETS34628' (size=15.0, b=False, i=False)
+      P2 (level=0): 'Naudé, M., Adebayo, K. J., & Nanda, R. (2023). A machine learning approach to detecting fraudulent job types. ' (size=15.0, b=False, i=False) 'AI & SOCIETY' (size=15.0, b=False, i=True) ', ' (size=15.0, b=False, i=False) '38' (size=15.0, b=False, i=True) '(3), 1013–1024. https://doi.org/10.1007/s00146-021-01314-z' (size=15.0, b=False, i=False)
+      P3 (level=0): 'Chiraratanasopha, B., & Chay-intr, T. (2022). Detecting fraud job recruitment using features reflecting from real-world knowledge of fraud. ' (size=15.0, b=False, i=False) 'Current Applied Science and Technology' (size=15.0, b=False, i=True) ', ' (size=15.0, b=False, i=False) '22' (size=15.0, b=False, i=True) '(6), 1–12. https://doi.org/10.55003/cast.2022.06.22.015' (size=15.0, b=False, i=False)
+      P4 (level=0): 'Varshitha, G., Sowmya, K., Sheshma, K., Sowmya, K., & Manikandan, R. A. (2026). Online recruitment fraud detection using deep learning approaches. ' (size=15.0, b=False, i=False) 'International Journal for Multidisciplinary Research (IJFMR)' (size=15.0, b=False, i=True) ', ' (size=15.0, b=False, i=False) '8' (size=15.0, b=False, i=True) '(2), 1–9. https://doi.org/10.36948/ijfmr.2026.v08i02.14582' (size=15.0, b=False, i=False)
+
+  Shape 2: name='Slide Number Placeholder 3', type=PLACEHOLDER (14), Placeholder=SLIDE_NUMBER (13)
+    Position: left=9.42in, top=6.95in, width=3.00in, height=0.40in
+    Full Text:
+9
+      P0 (level=0): 
+==================== SLIDE 10 ====================
+Layout: 'Title and Content'
+
+  Shape 0: name='Content Placeholder 2', type=PLACEHOLDER (14), Placeholder=OBJECT (7)
+    Position: left=0.92in, top=2.00in, width=0.07in, height=0.05in
+
+  Shape 1: name='Title 1', type=PLACEHOLDER (14), Placeholder=TITLE (1)
+    Position: left=0.00in, top=3.13in, width=13.33in, height=1.24in
+    Full Text:
+Thank You !
+      P0 (level=0): 'Thank You !' (size=60.0, b=True, i=False)
+
+  Shape 2: name='Slide Number Placeholder 3', type=PLACEHOLDER (14), Placeholder=SLIDE_NUMBER (13)
+    Position: left=9.42in, top=6.95in, width=3.00in, height=0.40in
+    Full Text:
+10
+      P0 (level=0): 
